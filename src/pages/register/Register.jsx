@@ -2,11 +2,14 @@ import axios from "axios";
 import { useRef } from "react";
 import "./register.css";
 import { useHistory } from "react-router";
+import {Link} from "react-router-dom";
 
 export default function Register() {
   const username = useRef();
   const email = useRef();
   const password = useRef();
+  const School = useRef();
+  const Filier = useRef();
   const passwordAgain = useRef();
   const history = useHistory();
 
@@ -19,6 +22,8 @@ export default function Register() {
         username: username.current.value,
         email: email.current.value,
         password: password.current.value,
+        school:School.current.value,
+        filier:Filier.current.value,
       };
       try {
         await axios.post("/auth/register", user);
@@ -33,25 +38,37 @@ export default function Register() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">Lamasocial</h3>
+          <h3 className="loginLogo">Netsos</h3>
           <span className="loginDesc">
-            Connect with friends and the world around you on Lamasocial.
+            Inscription
           </span>
         </div>
         <div className="loginRight">
           <form className="loginBox" onSubmit={handleClick}>
             <input
-              placeholder="Username"
+              placeholder="Nom Complet"
               required
               ref={username}
               className="loginInput"
             />
             <input
-              placeholder="Email"
+              placeholder="Email Universitaire ex: prenom.nom@edu.***.ma"
               required
               ref={email}
               className="loginInput"
               type="email"
+            />
+            <input
+              placeholder="Université"
+              required
+              ref={School}
+              className="loginInput"
+            />
+            <input
+              placeholder="Filière"
+              required
+              ref={Filier}
+              className="loginInput"
             />
             <input
               placeholder="Password"
@@ -62,16 +79,19 @@ export default function Register() {
               minLength="6"
             />
             <input
-              placeholder="Password Again"
+              placeholder="retaper mot de passe"
               required
               ref={passwordAgain}
               className="loginInput"
               type="password"
             />
+            
             <button className="loginButton" type="submit">
-              Sign Up
+              S'inscrire
             </button>
-            <button className="loginRegisterButton">Log into Account</button>
+            <Link to={"/login"}>
+            <button className="loginRegisterButton">Se Connecter</button>
+            </Link>
           </form>
         </div>
       </div>

@@ -18,6 +18,12 @@ export default function Topbar() {
 
     const {user} = useContext(AuthContext)
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+   //Disconnect logic
+    const disconnectHandler = async (e) => {
+        console.log("true")
+        window.localStorage.clear();
+        window.location.reload();
+      };
     
     return (
         <div className="topbarContainer">
@@ -34,8 +40,10 @@ export default function Topbar() {
             </div>
             <div className="topbarRight">
                 <div className="topbarLinks">
+                    
                     <span className="topbarLink">Page d'Acceuil</span>
-                    <span className="topbarLink">Timeline</span>
+                    
+                    <span className="topbarLink" onClick={disconnectHandler}>se déconnecter</span>
                 </div>
                 <div className="topbarIcons">
                     <div className="topbarIconItem">

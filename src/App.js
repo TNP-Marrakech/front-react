@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
 
+
 function App() {
   const { user } = useContext(AuthContext);
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/register">
           {user ? <Redirect to="/" /> : <Register />}
         </Route>
+        
         <Route path="/profile/:username">
           <Profile />
         </Route>

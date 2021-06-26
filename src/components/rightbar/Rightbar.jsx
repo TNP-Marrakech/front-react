@@ -14,7 +14,8 @@ export default function Rightbar({ user } ) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
-    currentUser.followings.includes(user?.id)
+    
+     currentUser.followings.includes(user?.id)
   );
   
 
@@ -36,11 +37,13 @@ export default function Rightbar({ user } ) {
   const handleClick = async () => {
     try {
       if (followed) {
+        console.log("followed")
         await axios.put(`/users/${user._id}/unfollow`, {
           userId: currentUser._id,
         });
         dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
+        console.log("not followed")
         await axios.put(`/users/${user._id}/follow`, {
           userId: currentUser._id,
         });

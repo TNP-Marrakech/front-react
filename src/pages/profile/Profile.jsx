@@ -7,6 +7,7 @@ import  { useEffect, useState } from "react";
 import axios from "axios";
 import{useParams} from "react-router"
 
+
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user,setUser] = useState({});
@@ -35,7 +36,7 @@ export default function Profile() {
                 src={
                   user.coverPicture
                     ? PF + user.coverPicture
-                    : PF + "person/noCover.png"
+                    : PF + "person/background.jpg"
                 }
                 alt=""
               />

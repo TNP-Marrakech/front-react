@@ -3,6 +3,7 @@ import "./login.css";
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
 import { CircularProgress } from "@material-ui/core";
+import {Link} from "react-router-dom";
 export default function Login() {
   //hook
   const email = useRef();
@@ -11,13 +12,15 @@ export default function Login() {
 
 
   const handleClick = (e) => {
+    
     e.preventDefault();
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch
     );
+    
   };
-  console.log(user);
+  
   return (
     <div className="login">
         
@@ -34,10 +37,13 @@ export default function Login() {
             <input placeholder="Password" type="password" className="loginInput" ref={password}  required minLength="6"/>
             <button className="loginButton" disabled={isFetching} >{isFetching ? <CircularProgress color="white" size="20px"/> : "Se Connecter"}</button>
             <span className="loginForgot">Mot de passe oublié ?</span>
-            <button className="loginRegisterButton">
+             </form>
+             <Link to= "/register">
+             <button className="loginRegisterButton">
             {isFetching ? <CircularProgress color="white" size="20px"/> : "Créer Votre Compte"}
             </button>
-          </form>
+            </Link>
+            
         </div>
       </div>
     </div>
