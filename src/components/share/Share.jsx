@@ -1,7 +1,7 @@
 import "./share.css";
 import {
   PermMedia,
-  Label,
+  
   Room,
   EmojiEmotions,
   Cancel,
@@ -68,12 +68,20 @@ export default function Share() {
                             style={{display:"none"}}
                             type="file" 
                             id="file" 
-                            accept=".png,.pdf,.jpeg,.jpg" 
+                            accept=".png,.jpeg,.jpg" 
                             onChange={(e) => setFile(e.target.files[0])}/>
                         </label>
                         <div  className="shareOption">
+                          <label htmlFor="file" className="shareOption">
                             <AttachFileIcon htmlColor="blue" className="shareIcon"/>
                             <span className="shareOptionText">Fichier</span>
+                            <input 
+                            style={{display:"none"}}
+                            type="file" 
+                            id="file" 
+                            accept=".pdf,.docx" 
+                            onChange={(e) => setFile(e.target.files[0])}/>
+                        </label>
                         </div>
                         <div  className="shareOption">
                             <Room htmlColor="green" className="shareIcon"/>

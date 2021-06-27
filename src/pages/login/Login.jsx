@@ -8,7 +8,7 @@ export default function Login() {
   //hook
   const email = useRef();
   const password = useRef();
-  const { user , isFetching,  dispatch } = useContext(AuthContext);
+  const {  isFetching,  dispatch } = useContext(AuthContext);
 
 
   const handleClick = (e) => {

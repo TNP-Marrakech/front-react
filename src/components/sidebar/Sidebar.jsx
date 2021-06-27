@@ -4,7 +4,7 @@ import {
     Chat,
     
     Group,
-    Bookmark,
+    
     HelpOutline,
     WorkOutline,
     Event,
@@ -35,10 +35,7 @@ export default function Sidebar() {
             <Group className="sidebarIcon" />
             <span className="sidebarListItemText">Groupes</span>
           </li>
-          <li className="sidebarListItem">
-            <Bookmark className="sidebarIcon" />
-            <span className="sidebarListItemText">Signets</span>
-          </li>
+          
           <li className="sidebarListItem">
             <HelpOutline className="sidebarIcon" />
             <span className="sidebarListItemText">Questions</span>

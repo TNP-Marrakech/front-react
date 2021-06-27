@@ -1,11 +1,13 @@
 import "./rightbar.css";
-import { Users } from "../../dummyData";
-import Online from "../online/Online";
-import { useContext, useEffect, useState } from "react";
+
+
+import { useContext, useEffect, useState ,useRef} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@material-ui/icons";
+import ChatOnline from "../chatOnline/ChatOnline";
+import { io } from "socket.io-client";
 
 
 
@@ -13,26 +15,42 @@ export default function Rightbar({ user } ) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
+  
+  
+  console.log(currentUser)
   const [followed, setFollowed] = useState(
     
      currentUser.followings.includes(user?.id)
   );
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const socket = useRef();
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    
+  }, []);
+  useEffect(() => {
+    socket.current.emit("addUser", currentUser._id);
+    socket.current.on("getUsers", (users) => {
+      setOnlineUsers(
+        currentUser.followings.filter((f) => users.some((u) => u.userId === f))
+      );
+    });
+  }, [currentUser.followings]);
   
-
   
 
   useEffect(() => {
     const getFriends = async () => {
       try {
-        console.log(user._id)
-        const friendList = await axios.get("/users/friends/" + user._id);
+        console.log(currentUser._id)
+        const friendList = await axios.get("/users/friends/" + currentUser._id);
         setFriends(friendList.data);
       } catch (err) {
         console.log(err);
       }
     };
     getFriends();
-  }, [user]);
+  }, [currentUser._id]);
 
   const handleClick = async () => {
     try {
@@ -68,9 +86,9 @@ export default function Rightbar({ user } ) {
         <img className="rightbarAd" src="assets/cit.jpg" alt="" />
         <h4 className="rightbarTitle">Amis en ligne</h4>
         <ul className="rightbarFriendList">
-          {Users.map((u) => (
-            <Online key={u.id} user={u} />
-          ))}
+          <Link to={"/messenger"} style={{textDecoration:"none"}}>
+          <ChatOnline onlineUsers={onlineUsers} currentId={currentUser._id}/>
+          </Link>
         </ul>
       </>
     );
