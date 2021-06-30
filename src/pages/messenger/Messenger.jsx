@@ -53,6 +53,7 @@ export default function Messenger() {
         const receiverId = currentChat.members.find(
             (member) => member !== user._id
           );
+         console.log(receiverId) 
         socket.current.emit("sendMessage", {
             senderId: user._id,
             receiverId,
@@ -104,7 +105,7 @@ export default function Messenger() {
                     <input placeholder="Trouver un étudiant" className="chatMenuInput"/>
                     {conversations.map((c) => (
                         <div onClick={()=>setCurrentChat(c)}>
-                <Conversation conversation={c} currentUser={user} />
+                <Conversation conversation={c} currentUser={user}  />
                         </div>
               
             ))}  
@@ -117,7 +118,7 @@ export default function Messenger() {
                 <div className="chatBoxTop">
                   {messages.map((m) => (
                     <div ref={scrollRef}>
-                      <Message message={m} own={m.sender === user._id} />
+                      <Message message={m} own={m.sender === user._id} currentProfilePicture={user.profilePicture}  />
                     </div>
                   ))}
                 </div>

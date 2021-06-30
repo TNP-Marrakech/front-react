@@ -24,7 +24,7 @@ export default function Profile() {
     };
     fetchUser();
 },[username]);
-console.log("vfvfvfvfvfvfv"+username)
+
 console.log(user.username)
 const doubleclickhandle =  (e) => {
   <div> 
@@ -68,6 +68,7 @@ const handleClick = async (e) => {
                     ? PF + user.profilePicture
                     : PF + "person/noAvatar.png"
                 }
+                 
                 alt=""
               />
             </div>

@@ -15,7 +15,7 @@ export default function Rightbar({ user } ) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
-  
+  const report = 0;
   
   console.log(currentUser)
   const [followed, setFollowed] = useState(
@@ -52,6 +52,27 @@ export default function Rightbar({ user } ) {
     getFriends();
   }, [currentUser._id]);
 
+
+  const handleReportButton = async () => {
+   
+    
+    const userupdate = {
+      report:user.report+1,
+      isAdmin:true
+    };
+    try{ 
+      console.log(currentUser.username +" currentUser : "+ currentUser.report);
+      console.log(user.username +"currentUser : " +user.report)
+      await axios.put(("/users/" + user._id),userupdate);
+      window.location.reload();
+      console.log(user.report)
+      
+    }catch (err){
+      console.log("error report button")
+      console.log(err)
+    }
+
+  }
   const handleClick = async () => {
     try {
       if (followed) {
@@ -104,8 +125,8 @@ export default function Rightbar({ user } ) {
           </button>
         )}
         {user.username !== currentUser.username && (
-          <button className="rightbarReportButton" >
-            Signaler
+          <button className="rightbarReportButton" onClick={handleReportButton} >
+            Signaler + {user.report}
           </button>
         )}
         <h4 className="rightbarTitle">Information étudiant</h4>

@@ -12,10 +12,13 @@ import {
     
   } from "@material-ui/icons";
   import GroupWorkIcon from '@material-ui/icons/GroupWork';
+  import  {  useContext } from "react";
+  import { AuthContext } from "../../context/AuthContext";
   import {Users} from "../../dummyData"
 import CloseFriend from "../closeFriend/CloseFriend";
 import {Link, Redirect} from "react-router-dom";
 export default function Sidebar() {
+  const {user:currentUser} = useContext(AuthContext)
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
@@ -45,7 +48,7 @@ export default function Sidebar() {
             <span className="sidebarListItemText">Groupes</span>
           </li>
           </Link>
-          <Link to="" style={{textDecoration:"none"}}>
+          <Link to={`questions/${currentUser.username}`} style={{textDecoration:"none"}}>
           <li className="sidebarListItem">
             <HelpOutline className="sidebarIcon" />
             <span className="sidebarListItemText">Questions</span>

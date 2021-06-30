@@ -1,5 +1,6 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
+import Question from "./pages/question/Question.jsx"
 import Register from "./pages/register/Register";
 import Profile from "./pages/profile/Profile";
 import Revise from "./pages/revise/Revise"
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path="/profile/:username">
           {!user ? <Redirect to="/" /> : <Profile />}
+        </Route>
+        <Route path="/questions/:username">
+          {!user ? <Redirect to="/" /> : <Question />}
         </Route>
       </Switch>
     </Router>
