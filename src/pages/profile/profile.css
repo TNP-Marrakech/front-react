@@ -48,3 +48,16 @@
 .profileRightBottom{
     display: flex;
 }
+
+.description{
+    position:relative;
+    margin: 50px solid black;
+}
+.shareCancelImg{
+    position: absolute;
+    top: 0;
+    left: 100px;
+    cursor: pointer;
+    opacity: 0.7;
+    
+  }

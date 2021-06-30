@@ -8,16 +8,22 @@ export default function Login() {
   //hook
   const email = useRef();
   const password = useRef();
+  
   const {  isFetching,  dispatch } = useContext(AuthContext);
 
 
   const handleClick = (e) => {
     
+      console.log("fetching...")
     e.preventDefault();
+    
     loginCall(
-      { email: email.current.value, password: password.current.value },
+      { email: email.current.value, password: password.current.value,
+      isActive:true },
       dispatch
     );
+      
+      
     
   };
   
@@ -34,16 +40,16 @@ export default function Login() {
         <div className="loginRight">
           <form className="loginBox" onSubmit={handleClick}>
             <input placeholder="Email" type="email" className="loginInput" ref={email} required/>
-            <input placeholder="Password" type="password" className="loginInput" ref={password}  required minLength="6"/>
+            <input placeholder="Mot de passe" type="password" className="loginInput" ref={password}  required minLength="6"/>
             <button className="loginButton" disabled={isFetching} >{isFetching ? <CircularProgress color="white" size="20px"/> : "Se Connecter"}</button>
             <span className="loginForgot">Mot de passe oublié ?</span>
-             </form>
+             
              <Link to= "/register">
              <button className="loginRegisterButton">
             {isFetching ? <CircularProgress color="white" size="20px"/> : "Créer Votre Compte"}
             </button>
             </Link>
-            
+            </form>
         </div>
       </div>
     </div>

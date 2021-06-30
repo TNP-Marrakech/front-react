@@ -87,7 +87,7 @@ export default function Rightbar({ user } ) {
         <h4 className="rightbarTitle">Amis en ligne</h4>
         <ul className="rightbarFriendList">
           <Link to={"/messenger"} style={{textDecoration:"none"}}>
-          <ChatOnline onlineUsers={onlineUsers} currentId={currentUser._id}/>
+          <ChatOnline onlineUsers={onlineUsers} currentId={currentUser._id} className="chatOnline"/>
           </Link>
         </ul>
       </>

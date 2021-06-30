@@ -1,7 +1,8 @@
 .topbarContainer {
     height: 50px;
     width: 100%;
-    background-color: #B233FF;
+    background-color : #1c1c1e ;
+color : #fefefe ;
     display: flex;
     align-items: center;
     position: sticky;
@@ -61,8 +62,11 @@
     margin-right: 10px;
     font-size: 14px;
     cursor: pointer;
+    color: white;
   }
-  
+  .ChatIcon{
+    color:#fefefe
+  }
   .topbarIcons {
     display: flex;
   }

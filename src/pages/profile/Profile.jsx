@@ -3,16 +3,18 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Feed from "../../components/feed/Feed";
-import  { useEffect, useState } from "react";
+import  { useEffect, useState ,useRef} from "react";
 import axios from "axios";
-import{useParams} from "react-router"
+import{useParams} from "react-router";
+  
+  import {Cancel} from "@material-ui/icons";
 
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user,setUser] = useState({});
   const username = useParams().username;
-  
+  const description = useRef();
 
   useEffect(()=>{
     const fetchUser = async () => {
@@ -22,6 +24,25 @@ export default function Profile() {
     };
     fetchUser();
 },[username]);
+console.log("vfvfvfvfvfvfv"+username)
+console.log(user.username)
+const doubleclickhandle =  (e) => {
+  <div> 
+  <textarea placeholder="Entrer une description" ref={description} ></textarea>
+  <button onClick={handleClick} >enregistrer</button>
+  </div>
+}
+
+const handleClick = async (e) => {
+  const userupdate = {
+    description:description.current.value,
+    isAdmin:true
+  };
+  console.log(user._id)
+  await axios.put(("/users/" + user._id),userupdate)
+  window.location.reload();
+}
+
     return (
         <>
         
@@ -52,7 +73,20 @@ export default function Profile() {
             </div>
             <div className="profileInfo">
                 <h4 className="profileInfoName">{user.username}</h4>
-                <span className="profileInfoDesc">{user.description}</span>
+                { user.description 
+                ? 
+                (<div className="description">
+                <span className="profileInfoDesc" onDoubleClick={doubleclickhandle}>{user.description}</span>
+                
+                  </div>
+                )
+                :(<div> 
+                <textarea placeholder="Entrer une description" ref={description} ></textarea>
+                <button onClick={handleClick} >enregistrer</button>
+                </div>
+                )
+
+                }
             </div>
           </div>
           <div className="profileRightBottom">
@@ -63,4 +97,4 @@ export default function Profile() {
       </div>
     </>
     )
-}
+              }

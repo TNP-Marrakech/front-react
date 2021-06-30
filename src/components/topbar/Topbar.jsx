@@ -20,7 +20,7 @@ export default function Topbar() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
    //Disconnect logic
     const disconnectHandler = async (e) => {
-        console.log("true")
+        console.log("disconnected")
         window.localStorage.clear();
         window.location.reload();
       };
@@ -40,9 +40,9 @@ export default function Topbar() {
             </div>
             <div className="topbarRight">
                 <div className="topbarLinks">
-                    
+                    <Link to="/" style={{textDecoration:"none"}}>
                     <span className="topbarLink">Page d'Acceuil</span>
-                    
+                    </Link>
                     <span className="topbarLink" onClick={disconnectHandler}>se déconnecter</span>
                 </div>
                 <div className="topbarIcons">
@@ -53,9 +53,10 @@ export default function Topbar() {
                     
                     <div className="topbarIconItem">
                         <Link to="/messenger" style={{textDecoration:"none"}}>
-                        <Chat/>
+                        <Chat className="ChatIcon"/>
                         </Link>
                         <span className="topbarIconBadge">2</span>
+                        
                     </div>
                     
                     <div className="topbarIconItem">

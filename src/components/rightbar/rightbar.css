@@ -96,6 +96,9 @@
   font-weight: 500;
   cursor: pointer;
 }
+.chatOnline{
+  color:black
+}
 .rightbarReportButton{
   margin-top: 30px;
   margin-bottom: 10px;
